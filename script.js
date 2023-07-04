@@ -22,9 +22,10 @@ function buildCard(color){
     card.setAttribute("data-color", color);
     card.setAttribute("data-revealed", false);
     card.addEventListener("click", ()=>{
-        const revealed = element.getAttribute("data-revealed");
+        console.log("click")
+        const revealed = card.getAttribute("data-revealed");
 
-        if(awaitingEndOfMove || revealed === "true"){
+        if(awaitingEndOfMove || revealed === "true" || card === activeTile){
             return; 
         } 
             card.style.backgroundColor = color; 
