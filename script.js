@@ -22,14 +22,34 @@ function buildCard(color){
     card.setAttribute("data-color", color);
     card.setAttribute("data-revealed", false);
     card.addEventListener("click", ()=>{
-        if(awaitingEndOfMove === true){
+        const revealed = element.getAttribute("data-revealed");
+
+        if(awaitingEndOfMove || revealed === "true"){
             return; 
-        } else{
+        } 
             card.style.backgroundColor = color; 
             if(!activeTile){
                 activeTile=card // it becomes truthy
                 return;
             }
+            /* matching logic */
+            const colorMatch = activeTile.getAttribute("data-color");
+            if(colorMatch === color){
+                activeTile.setAttribute("data-revealed","true")
+                card.setAttribute("data-revealed","true")
+                awaitingEndOfMove = false;
+                activeTile = null;
+                revealedCount += 2;
+                
+                if(revealedCount === tileCount){
+                    alert("You Won! Refreash to play again.")
+                }
+                return;
+            }
+
+            console.log(revealedCount)
+
+
             awaitingEndOfMove = true;
             setTimeout(()=>{
                 card.style.backgroundColor = null;
@@ -40,7 +60,7 @@ function buildCard(color){
 
            
             
-        }
+        
     });
     return card;
 }
