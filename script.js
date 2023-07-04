@@ -11,7 +11,7 @@ const tileCount = colorsPicklist.length;
 /* ----States--------------- */
 
 let revealedCount = 0;
-let activeTile = null;
+let activeTile = null; //falsy
 let awaitingEndOfMove = false;
 
 /* ---------Function-------- */
@@ -27,9 +27,19 @@ function buildCard(color){
         } else{
             card.style.backgroundColor = color; 
             if(!activeTile){
-                activeTile=card
+                activeTile=card // it becomes truthy
+                return;
             }
-            console.log(activeTile)
+            awaitingEndOfMove = true;
+            setTimeout(()=>{
+                card.style.backgroundColor = null;
+                activeTile.style.backgroundColor = null;
+                 awaitingEndOfMove = false;
+                 activeTile = null;
+            },1000)
+
+           
+            
         }
     });
     return card;
