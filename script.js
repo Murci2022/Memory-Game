@@ -1,5 +1,5 @@
 
-const titlesContainer = document.querySelector(".tiles");
+const tilesContainer = document.querySelector(".tiles");
 
 const colors = ["aqua","aquamarine","crimson","blue","dodgerblue","gold","greenyellow","teal",];
 
@@ -22,10 +22,14 @@ function buildCard(color){
     card.setAttribute("data-color", color);
     card.setAttribute("data-revealed", false);
     card.addEventListener("click", ()=>{
-        if(awaitingEndOfMove){
+        if(awaitingEndOfMove === true){
             return; 
         } else{
             card.style.backgroundColor = color; 
+            if(!activeTile){
+                activeTile=card
+            }
+            console.log(activeTile)
         }
     });
     return card;
@@ -38,9 +42,11 @@ for(let i = 0; i<tileCount; i++){
    
     const randomIndex = Math.floor(Math.random()*colorsPicklist.length);
     const color = colorsPicklist[randomIndex];
+    colorsPicklist.splice(randomIndex,1);
    
   
     const tile = buildCard(color);
-    titlesContainer.appendChild(tile) ; 
-    colorsPicklist.splice(randomIndex,1); 
+    tilesContainer.appendChild(tile) ; 
+     
+   
 }
