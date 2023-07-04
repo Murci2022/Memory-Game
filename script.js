@@ -18,7 +18,7 @@ let awaitingEndOfMove = false;
 
 function buildCard(color){
     const card = document.createElement("div");
-    card.classList.add("title");
+    card.classList.add("tile");
     card.setAttribute("data-color", color);
     card.setAttribute("data-revealed", false);
     card.addEventListener("click", ()=>{
@@ -40,7 +40,7 @@ for(let i = 0; i<tileCount; i++){
     const color = colorsPicklist[randomIndex];
    
   
-    const title = buildCard(color);
-    titlesContainer.appendChild(title) ; 
+    const tile = buildCard(color);
+    titlesContainer.appendChild(tile) ; 
     colorsPicklist.splice(randomIndex,1); 
 }
